@@ -6,4 +6,6 @@ import sd.jfr.web_scraping.bean.Course;
 
 @Repository
 public interface CourseDao extends JpaRepository<Course, Long> {
+
+    public Course findByCourseLink(String courseLink);
 }

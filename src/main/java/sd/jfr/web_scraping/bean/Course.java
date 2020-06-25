@@ -29,4 +29,10 @@ public class Course implements Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Chapter> chapters = new ArrayList<>();
 
+    public Course(String entitled, String language, String courseLink, List<Chapter> chapters) {
+        this.entitled = entitled;
+        this.language = language;
+        this.courseLink = courseLink;
+        this.chapters = chapters;
+    }
 }
