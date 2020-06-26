@@ -24,7 +24,8 @@ public class WebScrapingApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        int res = courseService.addCourse("https://openclassrooms.com/fr/courses/26832-apprenez-a-programmer-en-java", chapterService.exportChapters("https://openclassrooms.com/fr/courses/26832-apprenez-a-programmer-en-java", "course-part-summary__section"));
+        int res = courseService.addCourse("https://openclassrooms.com/en/courses/235344-apprenez-a-programmer-en-python", chapterService.exportChapters("https://openclassrooms.com/en/courses/235344-apprenez-a-programmer-en-python", "course-part-summary__section"));
         System.out.println(res);
+        // System.out.println(chapterService.exportChapters("https://fr.khanacademy.org/computing/computer-programming", "_14kisdro").size());
     }
 }
