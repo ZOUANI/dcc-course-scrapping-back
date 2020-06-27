@@ -1,10 +1,9 @@
 package sd.jfr.web_scraping.service;
 
-import sd.jfr.web_scraping.bean.Chapter;
+import com.detectlanguage.errors.APIError;
 
 import java.io.IOException;
-import java.util.List;
 
 public interface CourseService {
-    public int addCourse(String courseLink, List<Chapter> chapters) throws IOException;
+    public int addCourse(String courseLink, String searchLocation) throws IOException, APIError;
 }

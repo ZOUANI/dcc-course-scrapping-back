@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.print.DocFlavor;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +27,16 @@ public class Course implements Serializable {
     private int rating;
     private String language;
     private String courseLink;
+    @Column(length =2000000000)
+    private String courseSummarySection;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Chapter> chapters = new ArrayList<>();
 
-    public Course(String entitled, String language, String courseLink, List<Chapter> chapters) {
+    public Course(String entitled, String language, String courseLink, List<Chapter> chapters, String courseSummarySection) {
         this.entitled = entitled;
         this.language = language;
         this.courseLink = courseLink;
         this.chapters = chapters;
+        this.courseSummarySection = courseSummarySection;
     }
 }
