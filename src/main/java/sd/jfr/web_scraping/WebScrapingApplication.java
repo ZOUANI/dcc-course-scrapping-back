@@ -8,7 +8,7 @@ import sd.jfr.web_scraping.service.CourseService;
 
 
 @SpringBootApplication
-public class WebScrapingApplication implements CommandLineRunner {
+public class WebScrapingApplication {
 
     @Autowired
     private CourseService courseService;
@@ -17,12 +17,12 @@ public class WebScrapingApplication implements CommandLineRunner {
         SpringApplication.run(WebScrapingApplication.class, args);
     }
 
-
+/*
     @Override
     public void run(String... args) throws Exception {
-        int res = courseService.addCourse("https://www.khanacademy.org/computing/computer-programming", "_14kisdro");
+        // Course res = courseService.addCourse("https://www.khanacademy.org/computing/computer-programming", "_14kisdro");
         ;
-        System.out.println(res);
+        // System.out.println(res);
         // System.out.println(chapterService.exportChapters("https://fr.khanacademy.org/computing/computer-programming", "_14kisdro").size());
-    }
+    }*/
 }

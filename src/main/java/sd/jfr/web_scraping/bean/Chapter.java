@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
+import javax.persistence.Column;
 
 @Entity
 @Data
@@ -22,4 +23,6 @@ public class Chapter implements Serializable {
     private Long id;
     private String title;
     private String chapterLink;
+    @Column(length = 2000000000)
+    private String chapterSection;
 }

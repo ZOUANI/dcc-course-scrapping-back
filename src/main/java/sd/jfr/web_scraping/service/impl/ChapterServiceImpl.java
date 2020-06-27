@@ -1,5 +1,6 @@
 package sd.jfr.web_scraping.service.impl;
 
+import com.detectlanguage.DetectLanguage;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -16,6 +17,7 @@ import java.util.Vector;
 
 @Service
 public class ChapterServiceImpl implements ChapterService {
+
     @Override
     public List<Chapter> exportChapters(String url, String searchLocation) throws IOException {
         List<Chapter> chapters = new ArrayList<>();
@@ -29,17 +31,23 @@ public class ChapterServiceImpl implements ChapterService {
         return chapters;
     }
 
-
-    public void setChapterLinkAndAddToList(Elements chapters_links, List<String> links, List<Chapter> chapters) {
+    public void setChapterLinkAndAddToList(Elements chapters_links, List<String> links, List<Chapter> chapters) throws IOException {
         for (Element chapter_link : chapters_links) {
             Chapter chapter = new Chapter();
             if (!links.contains(chapter_link.attr("href"))) {
                 Vector<String> res = StringUtil.splitStrings(chapter_link.attr("href"), '/');
                 chapter.setTitle(res.get(res.size() - 1));
                 chapter.setChapterLink(chapter_link.absUrl("href"));
+                chapter.setChapterSection(extractChapterSectionHtml(chapter_link.absUrl("href")));
                 chapters.add(chapter);
                 links.add(chapter_link.absUrl("href"));
             }
         }
+    }
+
+    public String extractChapterSectionHtml(String chapterUrl) throws IOException {
+        Document doc = Jsoup.connect(chapterUrl).get();
+        String chapterSection = doc.getElementsByTag("body").html();
+        return chapterSection;
     }
 }
