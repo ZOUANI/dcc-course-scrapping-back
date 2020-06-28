@@ -11,6 +11,7 @@ package sd.jfr.web_scraping.dto;
  */
 public class CourseDto {
      private String courseLink;
+     private String htmlPageContent;
 
     public String getCourseLink() {
         return courseLink;
@@ -19,6 +20,15 @@ public class CourseDto {
     public void setCourseLink(String courseLink) {
         this.courseLink = courseLink;
     }
+
+    public String getHtmlPageContent() {
+        return htmlPageContent;
+    }
+
+    public void setHtmlPageContent(String htmlPageContent) {
+        this.htmlPageContent = htmlPageContent;
+    }
+    
      
      
     

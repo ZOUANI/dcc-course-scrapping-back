@@ -36,7 +36,7 @@ public class CourseRest {
     }
 
     @PostMapping("/getPageContent")
-    public String getPageContent(@RequestBody CourseDto courseDto) throws IOException {
+    public CourseDto getPageContent(@RequestBody CourseDto courseDto) throws IOException {
         return courseService.getPageContent(courseDto.getCourseLink());
     }
 

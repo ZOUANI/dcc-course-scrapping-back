@@ -13,6 +13,7 @@ import com.detectlanguage.DetectLanguage;
 
 import java.io.IOException;
 import org.jsoup.nodes.Element;
+import sd.jfr.web_scraping.dto.CourseDto;
 
 @Service
 public class CourseServiceImpl implements CourseService {
@@ -47,8 +48,10 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public String getPageContent(String url) throws IOException {
+    public CourseDto getPageContent(String url) throws IOException {
         Document doc = Jsoup.connect(url).get();
-        return doc.getElementsByTag("body").html();
+        CourseDto courseDto=new CourseDto();
+        courseDto.setHtmlPageContent(doc.getElementsByTag("body").html());
+        return courseDto;
     }
 }
