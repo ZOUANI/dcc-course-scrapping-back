@@ -12,6 +12,7 @@ import sd.jfr.web_scraping.service.CourseService;
 import com.detectlanguage.DetectLanguage;
 
 import java.io.IOException;
+
 import org.jsoup.nodes.Element;
 import sd.jfr.web_scraping.dto.CourseDto;
 
@@ -50,7 +51,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public CourseDto getPageContent(String url) throws IOException {
         Document doc = Jsoup.connect(url).get();
-        CourseDto courseDto=new CourseDto();
+        CourseDto courseDto = new CourseDto();
         courseDto.setHtmlPageContent(doc.getElementsByTag("body").html());
         return courseDto;
     }

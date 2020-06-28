@@ -2,11 +2,13 @@ package sd.jfr.web_scraping.rest;
 
 import com.detectlanguage.errors.APIError;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import sd.jfr.web_scraping.bean.Course;
 import sd.jfr.web_scraping.service.CourseService;
 
 import java.io.IOException;
+
 import sd.jfr.web_scraping.dao.CourseDao;
 import sd.jfr.web_scraping.dto.CourseDto;
 
@@ -35,7 +37,8 @@ public class CourseRest {
         return courseService.findByCourseLink(courseDto.getCourseLink());
     }
 
-    @PostMapping("/getPageContent")
+    @PostMapping(value = "/getPageContent",
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public CourseDto getPageContent(@RequestBody CourseDto courseDto) throws IOException {
         return courseService.getPageContent(courseDto.getCourseLink());
     }
