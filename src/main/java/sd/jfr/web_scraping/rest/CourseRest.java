@@ -23,10 +23,21 @@ public class CourseRest {
     public Course addCourse(@PathVariable String searchLocation, @RequestBody CourseDto courseDto) throws IOException, APIError {
         return courseService.addCourse(courseDto.getCourseLink(), searchLocation);
     }
-    
+
     @PostMapping("/")
-    public Course saveCourse(@RequestBody Course course){
+    public Course saveCourse(@RequestBody Course course) {
         courseDao.save(course);
         return course;
     }
+
+    @PostMapping("/findByCourseLink")
+    public Course findByCourseLink(@RequestBody CourseDto courseDto) {
+        return courseService.findByCourseLink(courseDto.getCourseLink());
+    }
+
+    @PostMapping("/getPageContent")
+    public String getPageContent(@RequestBody CourseDto courseDto) throws IOException {
+        return courseService.getPageContent(courseDto.getCourseLink());
+    }
+
 }

@@ -39,6 +39,7 @@ public class ChapterServiceImpl implements ChapterService {
                 chapter.setTitle(res.get(res.size() - 1));
                 chapter.setChapterLink(chapter_link.absUrl("href"));
                 chapter.setChapterSection(extractChapterSectionHtml(chapter_link.absUrl("href")));
+                chapter.setChapterContent(getPageContent(chapter_link.absUrl("href")));
                 chapters.add(chapter);
                 links.add(chapter_link.absUrl("href"));
             }
@@ -49,5 +50,15 @@ public class ChapterServiceImpl implements ChapterService {
         Document doc = Jsoup.connect(chapterUrl).get();
         String chapterSection = doc.getElementsByTag("body").html();
         return chapterSection;
+    }
+
+    @Override
+    public String getPageContent(String url) throws IOException {
+        String pageContent = "";
+        Document doc = Jsoup.connect(url).get();
+        for (Element element : doc.getAllElements()) {
+            pageContent += element.ownText();
+        }
+        return pageContent;
     }
 }

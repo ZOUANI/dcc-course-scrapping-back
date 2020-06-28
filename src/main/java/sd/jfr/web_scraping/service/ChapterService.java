@@ -6,5 +6,8 @@ import java.io.IOException;
 import java.util.List;
 
 public interface ChapterService {
+
     public List<Chapter> exportChapters(String url, String searchLocation) throws IOException;
+
+    public String getPageContent(String url) throws IOException;
 }

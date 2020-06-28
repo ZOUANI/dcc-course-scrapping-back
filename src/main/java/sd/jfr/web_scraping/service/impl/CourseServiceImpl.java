@@ -12,6 +12,7 @@ import sd.jfr.web_scraping.service.CourseService;
 import com.detectlanguage.DetectLanguage;
 
 import java.io.IOException;
+import org.jsoup.nodes.Element;
 
 @Service
 public class CourseServiceImpl implements CourseService {
@@ -34,5 +35,20 @@ public class CourseServiceImpl implements CourseService {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public Course findByCourseLink(String courseLink) {
+        if (courseDao.findByCourseLink(courseLink) != null) {
+            return courseDao.findByCourseLink(courseLink);
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public String getPageContent(String url) throws IOException {
+        Document doc = Jsoup.connect(url).get();
+        return doc.getElementsByTag("body").html();
     }
 }
