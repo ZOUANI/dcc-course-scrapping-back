@@ -52,7 +52,7 @@ public class CourseServiceImpl implements CourseService {
     public CourseDto getPageContent(String url) throws IOException {
         Document doc = Jsoup.connect(url).get();
         CourseDto courseDto = new CourseDto();
-        courseDto.setHtmlPageContent(doc.getElementsByTag("body").html());
+        courseDto.setHtmlPageContent(doc.html());
         return courseDto;
     }
 }

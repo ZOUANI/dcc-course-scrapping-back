@@ -38,8 +38,8 @@ public class ChapterServiceImpl implements ChapterService {
                 Vector<String> res = StringUtil.splitStrings(chapter_link.attr("href"), '/');
                 chapter.setTitle(res.get(res.size() - 1));
                 chapter.setChapterLink(chapter_link.absUrl("href"));
-                chapter.setChapterSection(extractChapterSectionHtml(chapter_link.absUrl("href")));
-                chapter.setChapterContent(getPageContent(chapter_link.absUrl("href")));
+                //chapter.setChapterSection(extractChapterSectionHtml(chapter_link.absUrl("href")));
+                //chapter.setChapterContent(getPageContent(chapter_link.absUrl("href")));
                 chapters.add(chapter);
                 links.add(chapter_link.absUrl("href"));
             }
