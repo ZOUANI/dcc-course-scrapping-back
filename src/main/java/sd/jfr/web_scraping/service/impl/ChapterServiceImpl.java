@@ -7,6 +7,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 import sd.jfr.web_scraping.bean.Chapter;
+import sd.jfr.web_scraping.dto.ChapterDto;
+import sd.jfr.web_scraping.dto.CourseDto;
 import sd.jfr.web_scraping.service.ChapterService;
 import sd.jfr.web_scraping.util.StringUtil;
 
@@ -60,5 +62,13 @@ public class ChapterServiceImpl implements ChapterService {
             pageContent += element.ownText();
         }
         return pageContent;
+    }
+
+    @Override
+    public ChapterDto getHmlPageContent(String url) throws IOException {
+        Document doc = Jsoup.connect(url).get();
+        ChapterDto chapterDto = new ChapterDto();
+        chapterDto.setChapterHtmlPageContent(doc.html());
+        return chapterDto;
     }
 }

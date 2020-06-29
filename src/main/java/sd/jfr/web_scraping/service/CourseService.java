@@ -4,6 +4,7 @@ import com.detectlanguage.errors.APIError;
 import sd.jfr.web_scraping.bean.Course;
 
 import java.io.IOException;
+import java.util.List;
 
 import sd.jfr.web_scraping.dto.CourseDto;
 
@@ -14,5 +15,7 @@ public interface CourseService {
     public Course findByCourseLink(String courseLink);
 
     public CourseDto getPageContent(String url) throws IOException;
+
+    public List<Course> getAllCourses();
 
 }

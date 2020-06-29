@@ -12,6 +12,7 @@ import sd.jfr.web_scraping.service.CourseService;
 import com.detectlanguage.DetectLanguage;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.jsoup.nodes.Element;
 import sd.jfr.web_scraping.dto.CourseDto;
@@ -54,5 +55,10 @@ public class CourseServiceImpl implements CourseService {
         CourseDto courseDto = new CourseDto();
         courseDto.setHtmlPageContent(doc.html());
         return courseDto;
+    }
+
+    @Override
+    public List<Course> getAllCourses() {
+        return courseDao.findAll();
     }
 }

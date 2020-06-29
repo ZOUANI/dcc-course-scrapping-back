@@ -10,6 +10,7 @@ import sd.jfr.web_scraping.bean.Course;
 import sd.jfr.web_scraping.service.CourseService;
 
 import java.io.IOException;
+import java.util.List;
 
 import sd.jfr.web_scraping.dao.CourseDao;
 import sd.jfr.web_scraping.dto.CourseDto;
@@ -50,4 +51,9 @@ public class CourseRest {
         return courseService.getPageContent(courseDto.getCourseLink());
     }
 
+    @ApiOperation("get all courses")
+    @GetMapping("/getAllCourses")
+    public List<Course> getAllCourses() {
+        return courseService.getAllCourses();
+    }
 }
