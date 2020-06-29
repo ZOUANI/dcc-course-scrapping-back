@@ -27,10 +27,11 @@ public class Course implements Serializable {
     private int rating;
     private String language;
     private String courseLink;
-    @Column(length =2000000000)
+    @Column(length = 2000000000)
     private String courseSummarySection;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Chapter> chapters = new ArrayList<>();
+    private String bagOfWords;
 
     public Course(String entitled, String language, String courseLink, List<Chapter> chapters, String courseSummarySection) {
         this.entitled = entitled;

@@ -21,5 +21,6 @@ public class ChapterMetaData implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title;
-    // obj json : bag of words
+    private String bagOfWords;
+
 }

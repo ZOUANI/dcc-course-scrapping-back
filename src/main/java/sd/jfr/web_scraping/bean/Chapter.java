@@ -27,4 +27,5 @@ public class Chapter implements Serializable {
     private String chapterSection;
     @Column(length = 2000000000)
     private String chapterContent;
+    private String bagOfWords;
 }
