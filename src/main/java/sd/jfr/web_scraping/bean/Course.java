@@ -21,6 +21,7 @@ public class Course implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String entitled;
+    @Column(length = 2000000000)
     private String description;
     private int hourlyVolume;
     private String difficulty;
