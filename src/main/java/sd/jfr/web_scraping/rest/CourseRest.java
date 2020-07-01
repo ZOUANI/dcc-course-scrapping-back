@@ -11,6 +11,7 @@ import sd.jfr.web_scraping.service.CourseService;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import sd.jfr.web_scraping.dao.CourseDao;
 import sd.jfr.web_scraping.dto.CourseDto;
@@ -25,10 +26,17 @@ public class CourseRest {
     @Autowired
     private CourseDao courseDao;
 
+
+    /*public Course addCourse(@PathVariable String searchLocation, @RequestBody CourseDto courseDto) throws IOException, APIError {
+        return courseService.addCourse(courseDto.getCourseLink(), searchLocation);
+    }*/
     @ApiOperation("extract course with chapters from a link")
     @PostMapping("/searchLocation/{searchLocation}")
-    public Course addCourse(@PathVariable String searchLocation, @RequestBody CourseDto courseDto) throws IOException, APIError {
-        return courseService.addCourse(courseDto.getCourseLink(), searchLocation);
+    public Callable<Course> addCourse(@PathVariable String searchLocation, @RequestBody CourseDto courseDto) throws InterruptedException, IOException, APIError {
+        return () -> {
+            Thread.sleep(10000); //this will cause a timeout
+            return courseService.addCourse(courseDto.getCourseLink(), searchLocation);
+        };
     }
 
     @ApiOperation("save course with chapters ")
@@ -55,5 +63,17 @@ public class CourseRest {
     @GetMapping("/getAllCourses")
     public List<Course> getAllCourses() {
         return courseService.getAllCourses();
+    }
+
+    @ApiOperation("update a course")
+    @PutMapping("/updateCourse/id/{id}")
+    public Course updateCourse(@PathVariable Long id, @RequestBody Course course) {
+        return courseService.updateCourse(id, course);
+    }
+
+    @ApiOperation("delete a course with chapters")
+    @DeleteMapping("/deleteCourse/id/{id}")
+    public void deleteCourse(@PathVariable Long id) {
+        courseService.deleteCourse(id);
     }
 }

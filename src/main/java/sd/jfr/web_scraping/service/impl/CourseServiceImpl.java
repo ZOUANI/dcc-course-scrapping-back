@@ -6,7 +6,9 @@ import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sd.jfr.web_scraping.bean.Course;
+import sd.jfr.web_scraping.bean.CourseTheme;
 import sd.jfr.web_scraping.dao.CourseDao;
+import sd.jfr.web_scraping.dao.CourseThemeDao;
 import sd.jfr.web_scraping.service.ChapterService;
 import sd.jfr.web_scraping.service.CourseService;
 import com.detectlanguage.DetectLanguage;
@@ -16,6 +18,7 @@ import java.util.List;
 
 import org.jsoup.nodes.Element;
 import sd.jfr.web_scraping.dto.CourseDto;
+import sd.jfr.web_scraping.service.CourseThemeService;
 
 @Service
 public class CourseServiceImpl implements CourseService {
@@ -24,6 +27,10 @@ public class CourseServiceImpl implements CourseService {
     private CourseDao courseDao;
     @Autowired
     private ChapterService chapterService;
+    @Autowired
+    private CourseThemeService courseThemeService;
+    @Autowired
+    private CourseThemeDao courseThemeDao;
 
     @Override
     public Course addCourse(String courseLink, String searchLocation) throws IOException, APIError {
@@ -60,5 +67,26 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public List<Course> getAllCourses() {
         return courseDao.findAll();
+    }
+
+    @Override
+    public Course updateCourse(Long id, Course course) {
+        Course course1 = courseDao.getOne(id);
+        course1.setDescription(course.getDescription());
+        course1.setDifficulty(course.getDifficulty());
+        course1.setHourlyVolume(course.getHourlyVolume());
+        course1.setRating(course.getRating());
+        return courseDao.save(course1);
+    }
+
+    @Override
+    public void deleteCourse(Long id) {
+        List<CourseTheme> courseThemes = courseThemeService.findByCourse_Id(id);
+        for (CourseTheme courseTheme : courseThemes) {
+            courseThemeDao.delete(courseTheme);
+        }
+        Course course = courseDao.getOne(id);
+        courseDao.delete(course);
+
     }
 }

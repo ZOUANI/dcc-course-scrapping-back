@@ -18,4 +18,8 @@ public interface CourseService {
 
     public List<Course> getAllCourses();
 
+    public Course updateCourse(Long id, Course course);
+
+    public void deleteCourse(Long id);
+
 }
