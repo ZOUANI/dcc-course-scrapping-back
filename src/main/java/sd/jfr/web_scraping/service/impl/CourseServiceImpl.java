@@ -41,6 +41,7 @@ public class CourseServiceImpl implements CourseService {
             String language = DetectLanguage.simpleDetect(doc.getElementsByClass(searchLocation).text());
             String courseSummarySection = doc.getElementsByClass(searchLocation).html();
             Course course = new Course(doc.title(), language, courseLink, chapterService.exportChapters(courseLink, searchLocation), courseSummarySection);
+            course.setCourseSummarySectionContent(chapterService.getPageContent(courseLink));
             return course;
         } else {
             return null;
